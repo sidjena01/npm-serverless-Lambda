@@ -1,9 +1,12 @@
-const serverless = require('serverless-http');
-const express = require('express')
-const app = express()
+const user = require('./user').user;
+const handler = function (event, context, callback) {
+  user.login(username, password)
+    .then((success) => {
+      //success
+    })
+    .catch(() => {
+      //error
+    });
+};
 
-app.get('/', function (req, res) {
-  res.send('Hello World!')
-})
-
-module.exports.handler = serverless(app);
+exports.handler = handler;
