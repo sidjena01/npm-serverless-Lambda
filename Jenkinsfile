@@ -6,12 +6,12 @@ pipeline {
   
   stages {
     
-     stage('Checkout') {
-       steps {
-          echo 'Pull code and build'
-          git credentialsId: 'github', url: "${REPO_URL}"
-       }
-     }
+             stage('Build') {
+            steps {
+                echo 'Pull code and build'
+                git credentialsId: 'github', url: "${REPO_URL}"
+            
+                   sh 'npm install'
     
     stage ('Creating NPM') {
       steps {
