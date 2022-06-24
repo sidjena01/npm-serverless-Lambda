@@ -9,7 +9,7 @@ pipeline {
              stage('Build') {
             steps {
                 echo 'Pull code and build'
-                git 'https://github.com/sidjena01/npm-serverless-Lambda.git'
+                // git 'https://github.com/sidjena01/npm-serverless-Lambda.git'
             
                    sh 'npm install'
             }
