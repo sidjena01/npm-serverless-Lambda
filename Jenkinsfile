@@ -12,6 +12,8 @@ pipeline {
                 git credentialsId: 'github', url: "${REPO_URL}"
             
                    sh 'npm install'
+            }
+             }
     
     stage ('Creating NPM') {
       steps {
