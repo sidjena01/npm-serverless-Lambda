@@ -16,6 +16,7 @@ pipeline {
         sh '''
         mkdir my-express-application && cd my-express-application
         npm init -f
+        '''
          }
     }
     
