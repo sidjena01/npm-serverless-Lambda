@@ -10,6 +10,8 @@ pipeline {
        steps {
           echo 'Pull code and build'
           git credentialsId: 'github', url: "${REPO_URL}"
+       }
+     }
     
     stage ('Creating NPM') {
       steps {
@@ -34,4 +36,4 @@ pipeline {
         }
   }
      }
-  }
+  
