@@ -1,15 +1,15 @@
 pipeline {
     agent any
-    environment {
-        REPO_URL = 'https://github.com/sidjena01/npm-serverless-Lambda.git'
-           }
+   // environment {
+    //    REPO_URL = 'https://github.com/sidjena01/npm-serverless-Lambda.git'
+      //     }
   
   stages {
     
              stage('Build') {
             steps {
                 echo 'Pull code and build'
-                git credentialsId: 'github', url: "${REPO_URL}"
+                git 'https://github.com/sidjena01/npm-serverless-Lambda.git'
             
                    sh 'npm install'
             }
