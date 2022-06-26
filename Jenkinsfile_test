@@ -36,14 +36,14 @@ pipeline {
 
         stage('Deploy to Development') {
         
-         when {
-               environment ignoreCase: true, name: "ENVIRONEMENT", value: "Dev"
+      //   when {
+       //        environment ignoreCase: true, name: "ENVIRONEMENT", value: "Dev"
              }
-       // when {
-         //       expression { 
-        //           return params.ENVIRONMENT == 'DEV'
-         //       }
-        //    }
+        when {
+               expression { 
+                 return params.ENVIRONMENT == 'Dev'
+               }
+          }
            
             steps {
                 echo 'Deploy package to Dev'
