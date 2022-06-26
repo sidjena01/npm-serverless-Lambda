@@ -46,7 +46,8 @@ pipeline {
            
             steps {
                 echo 'Deploy package to Dev'
-                 sh "serverless deploy --alias DEV --region ${env.ENVIRONMENT} --version ${VERSION}"
+                // sh "serverless deploy --alias DEV --region ${env.ENVIRONMENT} --version ${VERSION}"
+                 sh "serverless deploy --alias DEV --region ${env.ENVIRONMENT}"
             }
         }
        
