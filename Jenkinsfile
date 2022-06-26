@@ -31,6 +31,13 @@ pipeline {
                    sh ''' npm install --save express serverless-http '''
                    }
               }
+      
+      stage('Test') {
+            steps {
+                echo 'Run tests and publish results'
+                sh 'npm run test'
+            }
+        }
      stage ('Serverless Deploy'){
        steps {
          sh '''serverless deploy'''
