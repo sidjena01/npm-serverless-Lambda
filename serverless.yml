@@ -2,7 +2,7 @@ service: my-express-application
 
 provider:
   name: aws
-  runtime: nodejs16.0
+  runtime: nodejs16.x
   stage: dev
   region: us-east-1
 
