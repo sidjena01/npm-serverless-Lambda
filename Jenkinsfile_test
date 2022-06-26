@@ -4,9 +4,10 @@ pipeline {
      choice choices: ['Dev', 'QA', 'Production'], description: "Choose which environment to push changes to.", name: "ENVIRONMENT"
  }
     
-//    environment {
-//        DEPLOY_TO = "${params.DEPLOY_TO}"
-//    }
+     environment {
+      // ENVIRONEMNT = "${params.DEPLOY_TO}"
+      ENVIRONMENT = "us-east-1"
+    }
     stages {
          
         stage('NPM Initialization') {
