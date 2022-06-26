@@ -1,7 +1,7 @@
 pipeline {
     agent any
      parameters {
-     choice choices: ['Dev', 'QA', 'PROD'], description: "Choose which environment to push changes to.", name: "ENVIRONMENT"
+     choice choices: ['Dev', 'QA', 'Production'], description: "Choose which environment to push changes to.", name: "ENVIRONMENT"
      }
     environment {
       ENVIRONMENT = "us-east-1"
@@ -41,7 +41,7 @@ pipeline {
                     }
                 }
                 stage("Production") {
-                    when { expression { params.ENVIRONMENT == "PROD" } }
+                    when { expression { params.ENVIRONMENT == "Production" } }
                     steps {
                          sh "serverless deploy --region ${env.ENVIRONMENT}"
                     }
