@@ -1,41 +1,37 @@
 pipeline {
     agent any
-   // environment {
-   //     REPO_URL = 'https://DittoJenkins@bitbucket.org/empiricom/your-repo-name.git'
-  //  }
     stages {
         // choice(QA, DEV)
-        stage('Build') {
+        stage('NPM Initialization') {
             steps {
                 echo 'Pull code and build'
-              //  git credentialsId: 'bitbucket', url: "${REPO_URL}"
-                sh 'npm install'
-                sh 'npm run build'
+                 sh '''
+                mkdir my-express-application && cd my-express-application
+                npm init -f
+                  '''
+        }
+     }
+        stage('Build') {
+            steps {
+                    echo 'Building the code===='
+                   sh ''' npm install --save express serverless-http '''
+                    echo 'Run tests and publish results'
+                    
             }
         }
- 
         stage('Test') {
             steps {
                 echo 'Run tests and publish results'
-                bat 'npm run test'
+                sh 'npm run test'
             }
         }
-        
-        stage('Deploy to DEV') {
-            when {
+
+        stage('Deploy to Development') {
+        when {
                 expression { 
                    return params.ENVIRONMENT == 'DEV'
                 }
             }
-            steps {
-                    sh """
-                    echo "deploy to production"
-                    """
-                }
-            }
-   }
-
-        stage('Deploy to Development') {
             environment {
                 VERSION = bat(returnStdout: true, script: '@npm run get-version --silent').trim()
             }
@@ -45,5 +41,4 @@ pipeline {
             }
         }
        
-    }
     }
