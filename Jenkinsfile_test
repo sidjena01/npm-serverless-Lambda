@@ -10,17 +10,6 @@ pipeline {
                             choice(
                                 choices: ['DEV', 'QA' , 'PROD'], 
                                 name: 'ENVIRONMENT'
-                            ),
-                            booleanParam(
-                                defaultValue: true, 
-                                description: '', 
-                                name: 'BOOLEAN'
-                            ),
-                           
-                            string(
-                                defaultValue: 'scriptcrunch', 
-                                name: 'STRING-PARAMETER', 
-                                trim: true
                             )
                         ])
                     ])
