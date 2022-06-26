@@ -38,7 +38,7 @@ pipeline {
         
       //   when {
        //        environment ignoreCase: true, name: "ENVIRONEMENT", value: "Dev"
-             }
+        //     }
         when {
                expression { 
                  return params.ENVIRONMENT == 'Dev'
