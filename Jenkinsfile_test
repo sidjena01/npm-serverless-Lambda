@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+       ENVIRONMENT = 'DEV'
+       
+    }
     stages {
        
                stage('Setup parameters') {
