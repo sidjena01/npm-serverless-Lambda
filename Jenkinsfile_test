@@ -49,11 +49,15 @@ pipeline {
      //   }
 
         stage('Deploy to Development') {
-        when {
-                expression { 
-                   return params.ENVIRONMENT == 'DEV'
-                }
-            }
+        
+         when { 
+        environment name: 'ENVIRONMENT', value: 'DEV' 
+    }
+       // when {
+         //       expression { 
+        //           return params.ENVIRONMENT == 'DEV'
+         //       }
+        //    }
            
             steps {
                 echo 'Deploy package to Dev'
