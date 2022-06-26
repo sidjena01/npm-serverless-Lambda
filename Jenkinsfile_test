@@ -1,7 +1,7 @@
 pipeline {
     agent any
-//    parameters {
-//        choice choices: ['Dev', 'QA', 'Production'], description: "Choose which environment to push changes to.", name: "DEPLOY_TO"
+     parameters {
+     choice choices: ['Dev', 'QA', 'Production'], description: "Choose which environment to push changes to.", name: "ENVIRONMENT"
 
 //    }
     
@@ -47,7 +47,7 @@ pipeline {
            
             steps {
                 echo 'Deploy package to Dev'
-                 bat "serverless deploy --alias DEV --region ${env.DEPLOY_REGION} --version ${VERSION}"
+                 bat "serverless deploy --alias DEV --region ${env.ENVIRONMENT} --version ${VERSION}"
             }
         }
        
