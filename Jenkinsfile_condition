@@ -1,0 +1,52 @@
+pipeline {
+    agent any
+     parameters {
+     choice choices: ['Dev', 'QA', 'PROD'], description: "Choose which environment to push changes to.", name: "ENVIRONMENT"
+     }
+    environment {
+      ENVIRONMENT = "us-east-1"
+     }
+    stages {
+         
+        stage('NPM Initialization') {
+            steps {
+                echo 'Pull code and build'
+                 sh '''
+                mkdir my-express-application && cd my-express-application
+                npm init -f
+                  '''
+        }
+     }
+        stage('Build') {
+            steps {
+                    echo 'Building the code===='
+                   sh ''' npm install --save express serverless-http '''
+                    echo 'Run tests and publish results'
+                    
+            }
+        }
+
+        stage("Deploy to Environment") {
+            parallel {
+                stage("Dev") {
+                    when { expression { params.ENVIRONMENT == "Dev" } }
+                    steps {
+                         sh "serverless deploy --region ${env.ENVIRONMENT}"
+                    }
+                }
+                stage("QA") {
+                    when { expression { params.ENVIRONMENT == "QA" } }
+                    steps {
+                        sh "serverless deploy --region ${env.ENVIRONMENT}"
+                    }
+                }
+                stage("Production") {
+                    when { expression { params.ENVIRONMENT == "PROD" } }
+                    steps {
+                         sh "serverless deploy --region ${env.ENVIRONMENT}"
+                    }
+                }
+            }
+        }
+    }
+}
