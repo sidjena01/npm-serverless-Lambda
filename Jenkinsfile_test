@@ -2,8 +2,7 @@ pipeline {
     agent any
      parameters {
      choice choices: ['Dev', 'QA', 'Production'], description: "Choose which environment to push changes to.", name: "ENVIRONMENT"
-
-//    }
+ }
     
 //    environment {
 //        DEPLOY_TO = "${params.DEPLOY_TO}"
@@ -53,4 +52,3 @@ pipeline {
        
     }
     }
-}
