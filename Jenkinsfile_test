@@ -4,7 +4,7 @@ pipeline {
    //     REPO_URL = 'https://DittoJenkins@bitbucket.org/empiricom/your-repo-name.git'
   //  }
     stages {
-        choice(QA, DEV)
+        // choice(QA, DEV)
         stage('Build') {
             steps {
                 echo 'Pull code and build'
@@ -20,6 +20,20 @@ pipeline {
                 bat 'npm run test'
             }
         }
+        
+        stage('Deploy to DEV') {
+            when {
+                expression { 
+                   return params.ENVIRONMENT == 'DEV'
+                }
+            }
+            steps {
+                    sh """
+                    echo "deploy to production"
+                    """
+                }
+            }
+   }
 
         stage('Deploy to Development') {
             environment {
@@ -27,21 +41,8 @@ pipeline {
             }
             steps {
                 echo 'Deploy package to Dev'
-                bat "serverless deploy --alias DEV --region ${env.DEPLOY_REGION} --version ${VERSION}"
+                sh "serverless deploy --alias DEV --region ${env.DEPLOY_REGION} --version ${VERSION}"
             }
         }
-        stage('Deploy to QA') {
-            environment {
-                VERSION = bat(returnStdout: true, script: '@npm run get-version --silent').trim()
-            }
-            input {
-                message "Promote package to QA?"
-                ok "Promote"
-                submitter "${env.QA_DEPLOY_SUBMITTERS}"
-            }
-            steps {
-                echo 'Modify vars and promote package to QA'
-                bat "serverless deploy --alias QA --region ${env.DEPLOY_REGION} --version ${VERSION}"
-            }
-        }
+       
     }
