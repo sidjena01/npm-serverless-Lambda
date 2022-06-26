@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters {
         choice choices: ['Dev', 'QA', 'Production'], description: "Choose which environment to push changes to.", name: "DEPLOY_TO"
-        booleanParam defaultValue: true, "Choose whether to deploy the database.", name: "DEPLOY_DB"
+        // booleanParam defaultValue: true, "Choose whether to deploy the database.", name: "DEPLOY_DB"
     }
     
     environment {
