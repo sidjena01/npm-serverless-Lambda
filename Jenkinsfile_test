@@ -1,29 +1,15 @@
 pipeline {
     agent any
+    parameters {
+        choice choices: ['Dev', 'QA', 'Production'], description: "Choose which environment to push changes to.", name: "DEPLOY_TO"
+        booleanParam defaultValue: true, "Choose whether to deploy the database.", name: "DEPLOY_DB"
+    }
+    
     environment {
-       ENVIRONMENT = 'DEV'
-       
+        DEPLOY_TO = "${params.DEPLOY_TO}"
     }
     stages {
-       
-               stage('Setup parameters') {
-            steps {
-                script { 
-                    properties([
-                        parameters([
-                            choice(
-                                choices: ['DEV', 'QA' , 'PROD'], 
-                                name: 'ENVIRONMENT'
-                            )
-                        ])
-                    ])
-                }
-            }
-        }
-       
-       
-       
-       
+         
         stage('NPM Initialization') {
             steps {
                 echo 'Pull code and build'
@@ -50,9 +36,9 @@ pipeline {
 
         stage('Deploy to Development') {
         
-         when { 
-        environment name: 'ENVIRONMENT', value: 'DEV' 
-    }
+        when {
+                environment ignoreCase: true, name: "DEPLOY_TO", value: "Dev"
+            }
        // when {
          //       expression { 
         //           return params.ENVIRONMENT == 'DEV'
@@ -61,7 +47,7 @@ pipeline {
            
             steps {
                 echo 'Deploy package to Dev'
-                sh "serverless deploy --alias DEV --region ${env.DEPLOY_REGION} --version ${VERSION}"
+                sh "serverless deploy --alias Dev --region ${env.DEPLOY_REGION} --version ${VERSION}"
             }
         }
        
