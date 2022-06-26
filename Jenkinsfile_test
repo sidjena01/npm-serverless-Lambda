@@ -8,7 +8,7 @@ pipeline {
 //        DEPLOY_TO = "${params.DEPLOY_TO}"
 //    }
     stages {
-         choice(QA, DEV)
+         
         stage('NPM Initialization') {
             steps {
                 echo 'Pull code and build'
