@@ -36,9 +36,9 @@ pipeline {
 
         stage('Deploy to Development') {
         
-  //      when {
-  //              environment ignoreCase: true, name: "DEPLOY_TO", value: "Dev"
-  //          }
+         when {
+               environment ignoreCase: true, name: "ENVIRONEMENT", value: "Dev"
+             }
        // when {
          //       expression { 
         //           return params.ENVIRONMENT == 'DEV'
