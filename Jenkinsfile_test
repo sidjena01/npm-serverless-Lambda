@@ -1,7 +1,36 @@
 pipeline {
     agent any
     stages {
-        // choice(QA, DEV)
+       
+               stage('Setup parameters') {
+            steps {
+                script { 
+                    properties([
+                        parameters([
+                            choice(
+                                choices: ['DEV', 'QA' , 'PROD'], 
+                                name: 'ENVIRONMENT'
+                            ),
+                            booleanParam(
+                                defaultValue: true, 
+                                description: '', 
+                                name: 'BOOLEAN'
+                            ),
+                           
+                            string(
+                                defaultValue: 'scriptcrunch', 
+                                name: 'STRING-PARAMETER', 
+                                trim: true
+                            )
+                        ])
+                    ])
+                }
+            }
+        }
+       
+       
+       
+       
         stage('NPM Initialization') {
             steps {
                 echo 'Pull code and build'
