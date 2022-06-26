@@ -25,13 +25,7 @@ pipeline {
                     
             }
         }
-         stage("Validate before Apply") {
-               steps{
-                timeout(time:30, unit:'MINUTES') {
-                    input 'Are you sure to promote this build to QA?'
-                    }
-                }
-            }
+         
 
 
         stage("Deploy to Environment") {
@@ -42,6 +36,16 @@ pipeline {
                          sh "serverless deploy --region ${env.ENVIRONMENT}"
                     }
                 }
+                
+                stage("Validate before Apply") {
+               steps{
+                timeout(time:30, unit:'MINUTES') {
+                    input 'Are you sure to promote this build to QA?'
+                    }
+                }
+            }
+                
+                
                 stage("QA") {
                     when { expression { params.ENVIRONMENT == "QA" } }
                     steps {
