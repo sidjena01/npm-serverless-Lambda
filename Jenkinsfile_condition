@@ -38,7 +38,7 @@ pipeline {
            // parallel {
                 stage("Dev") {
                     when { expression { params.ENVIRONMENT == "Dev" } }
-                    steps {
+                    step {
                        if (env.ENVIRONMENT == "Dev") {                                          
                            sh "serverless deploy --region ${env.ENVIRONMENT}"
                                   } 
@@ -52,8 +52,8 @@ pipeline {
                                
                 stage("QA") {
                     when { expression { params.ENVIRONMENT == "QA" } }
-                    steps {
-                       if (env.ENVIRONMENT == "Dev") {                                          
+                    step {
+                       if (env.ENVIRONMENT == "QA") {                                          
                            sh "serverless deploy --region ${env.ENVIRONMENT}"
                                   } 
                        else {                                   
@@ -64,8 +64,8 @@ pipeline {
                 }
                 stage("Production") {
                     when { expression { params.ENVIRONMENT == "Production" } }
-                    steps {
-                       if (env.ENVIRONMENT == "Dev") {                                          
+                    step {
+                       if (env.ENVIRONMENT == "PROD") {                                          
                            sh "serverless deploy --region ${env.ENVIRONMENT}"
                                   } 
                        else {                                   
