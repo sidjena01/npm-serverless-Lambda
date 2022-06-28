@@ -40,9 +40,9 @@ pipeline {
                     when { expression { params.ENVIRONMENT == "Dev" } }
                     steps {
                         script {
-                       if (env.ENVIRONMENT == "Dev") {                                          
+                    //   if (env.ENVIRONMENT == "Dev") {                                          
                            sh "serverless deploy --region ${env.ENVIRONMENT}"
-                                  } 
+                              //    } 
                                }
                   
                          // sh "serverless deploy --region ${env.ENVIRONMENT}"
@@ -54,9 +54,9 @@ pipeline {
                     when { expression { params.ENVIRONMENT == "QA" } }
                     steps {
                     script {
-                       if (env.ENVIRONMENT == "QA") {                                          
+                    //   if (env.ENVIRONMENT == "QA") {                                          
                            sh "serverless deploy --region ${env.ENVIRONMENT}"
-                                  } 
+                             //     } 
                            }
                         
                          // sh "serverless deploy --region ${env.ENVIRONMENT}"
@@ -66,9 +66,9 @@ pipeline {
                     when { expression { params.ENVIRONMENT == "Production" } }
                     steps {
                         script {
-                       if (env.ENVIRONMENT == "PROD") {                                          
+                     //  if (env.ENVIRONMENT == "PROD") {                                          
                            sh "serverless deploy --region ${env.ENVIRONMENT}"
-                                  } 
+                           //       } 
                               }
                       
                          // sh "serverless deploy --region ${env.ENVIRONMENT}"
