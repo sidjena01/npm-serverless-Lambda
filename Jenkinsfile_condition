@@ -34,8 +34,8 @@ pipeline {
             }
 
 
-        stage("Deploy to Environment") {
-            parallel {
+       // stage("Deploy to Environment") {
+        //    parallel {
                 stage("Dev") {
                     when { expression { params.ENVIRONMENT == "Dev" } }
                     steps {
@@ -58,5 +58,5 @@ pipeline {
                 }
             }
         }
-    }
-}
+//    }
+// }
