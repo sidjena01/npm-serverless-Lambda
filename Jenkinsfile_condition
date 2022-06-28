@@ -32,14 +32,20 @@ pipeline {
                     }
                 }
             }
-
+       
 
        // stage("Deploy to Environment") {
            // parallel {
                 stage("Dev") {
                     when { expression { params.ENVIRONMENT == "Dev" } }
                     steps {
-                         sh "serverless deploy --region ${env.ENVIRONMENT}"
+                       if (env.ENVIRONMENT == "Dev") {                                          
+                           sh "serverless deploy --region ${env.ENVIRONMENT}"
+                                  } 
+                       else {                                   
+                         echo "Cannot Deploy !!! Wrong parameter Chosen ----------------"
+                             }   
+                         // sh "serverless deploy --region ${env.ENVIRONMENT}"
                     }
                 }
                 
@@ -47,13 +53,30 @@ pipeline {
                 stage("QA") {
                     when { expression { params.ENVIRONMENT == "QA" } }
                     steps {
-                        sh "serverless deploy --region ${env.ENVIRONMENT}"
+                       if (env.ENVIRONMENT == "Dev") {                                          
+                           sh "serverless deploy --region ${env.ENVIRONMENT}"
+                                  } 
+                       else {                                   
+                         echo "Cannot Deploy !!! Wrong parameter Chosen ----------------"
+                             }   
+                         // sh "serverless deploy --region ${env.ENVIRONMENT}"
                     }
                 }
                 stage("Production") {
                     when { expression { params.ENVIRONMENT == "Production" } }
                     steps {
-                         sh "serverless deploy --region ${env.ENVIRONMENT}"
+                       if (env.ENVIRONMENT == "Dev") {                                          
+                           sh "serverless deploy --region ${env.ENVIRONMENT}"
+                                  } 
+                       else {                                   
+                         echo "Cannot Deploy !!! Wrong parameter Chosen ----------------"
+                             }   
+                         // sh "serverless deploy --region ${env.ENVIRONMENT}"
+                    }
+                }
+                         
+                         
+                         
                   //  }
               //  }
             }
