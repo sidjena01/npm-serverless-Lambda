@@ -38,10 +38,12 @@ pipeline {
            // parallel {
                 stage("Dev") {
                     when { expression { params.ENVIRONMENT == "Dev" } }
-                    step {
+                    steps {
+                        script {
                        if (env.ENVIRONMENT == "Dev") {                                          
                            sh "serverless deploy --region ${env.ENVIRONMENT}"
                                   } 
+                               }
                        else {                                   
                          echo "Cannot Deploy !!! Wrong parameter Chosen ----------------"
                              }   
@@ -52,10 +54,12 @@ pipeline {
                                
                 stage("QA") {
                     when { expression { params.ENVIRONMENT == "QA" } }
-                    step {
+                    steps {
+                    script {
                        if (env.ENVIRONMENT == "QA") {                                          
                            sh "serverless deploy --region ${env.ENVIRONMENT}"
                                   } 
+                           }
                        else {                                   
                          echo "Cannot Deploy !!! Wrong parameter Chosen ----------------"
                              }   
@@ -64,10 +68,12 @@ pipeline {
                 }
                 stage("Production") {
                     when { expression { params.ENVIRONMENT == "Production" } }
-                    step {
+                    steps {
+                        script {
                        if (env.ENVIRONMENT == "PROD") {                                          
                            sh "serverless deploy --region ${env.ENVIRONMENT}"
                                   } 
+                              }
                        else {                                   
                          echo "Cannot Deploy !!! Wrong parameter Chosen ----------------"
                              }   
